@@ -25,7 +25,8 @@ pipeline {
                 sh "echo ${env.OPERATOR} >> input.txt"
                 sh "ls"
                 sh "ls JenkinsBSP/src"
-                sh "java JenkinsBSP/src/Calculator.class < input.txt > output.txt"
+                sh "cat JenkinsBSP/src/Calculator.class"
+                sh "java JenkinsBSP/src/Calculator < input.txt > output.txt"
                 sh "cat output.txt"
             }
         }
