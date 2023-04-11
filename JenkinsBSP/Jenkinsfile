@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        INPUT_VALUE_1 = '5'
+        INPUT_VALUE_2 = '10'
+        OPERATOR = '+'
+    }
+
     stages {
         stage('Declarative: Checkout SCM') {
             steps {
@@ -14,14 +20,11 @@ pipeline {
         }
         stage('Test') {
             steps {
-                 script {
-                    def scanner = new Scanner(System.in)
-                    sh "echo 5 > input.txt"
-                    sh "echo 10 >> input.txt"
-                    sh "echo + >> input.txt"
-                    sh "java Calculator < input.txt > output.txt"
-                    sh "cat output.txt"
-                }
+                sh "echo ${env.INPUT_VALUE_1} > input.txt"
+                sh "echo ${env.INPUT_VALUE_2} >> input.txt"
+                sh "echo ${env.OPERATOR} >> input.txt"
+                sh "java Calculator < input.txt > output.txt"
+                sh "cat output.txt"
             }
         }
     }
