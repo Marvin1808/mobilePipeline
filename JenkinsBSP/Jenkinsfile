@@ -23,7 +23,7 @@ pipeline {
                 sh "echo ${env.INPUT_VALUE_1} >> input.txt"
                 sh "echo ${env.INPUT_VALUE_2} >> input.txt"
                 sh "echo ${env.OPERATOR} >> input.txt"
-                sh "java JenkinsBSP/src/Calculator < input.txt > output.txt"
+                sh "java Calculator < input.txt > output.txt"
                 sh "cat output.txt"
             }
         }
