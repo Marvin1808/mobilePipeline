@@ -14,7 +14,12 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'env JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 /usr/lib/jvm/java-8-openjdk-amd64/bin/java JenkinsBSP/src/CalculatorTest'
+                    def scanner = new Scanner(System.in)
+                    sh "echo 5 > input.txt"
+                    sh "echo 10 >> input.txt"
+                    sh "echo + >> input.txt"
+                    sh "java Calculator < input.txt > output.txt"
+                    sh "cat output.txt"
             }
         }
     }
