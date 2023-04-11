@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Declarative: Checkout SCM') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Build') {
             steps {
                 sh 'javac JenkinsBSP/src/Calculator.java'
@@ -9,14 +14,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                script {
-                    def scanner = new Scanner(System.in)
-                    sh "echo 5 > input.txt"
-                    sh "echo 10 >> input.txt"
-                    sh "echo + >> input.txt"
-                    sh "java Calculator < input.txt > output.txt"
-                    sh "cat output.txt"
-                }
+                sh 'env JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 /usr/lib/jvm/java-8-openjdk-amd64/bin/java JenkinsBSP/src/CalculatorTest'
             }
         }
     }
