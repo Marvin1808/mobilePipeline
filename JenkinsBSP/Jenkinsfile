@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                sh 'javac Calculator.java'
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    def scanner = new Scanner(System.in)
+                    sh "echo 5 > input.txt"
+                    sh "echo 10 >> input.txt"
+                    sh "echo + >> input.txt"
+                    sh "java Calculator < input.txt > output.txt"
+                    sh "cat output.txt"
+                }
+            }
+        }
+    }
+}
